@@ -1,0 +1,23 @@
+TODO:
+
+Type:
+
+1) Ajouter et reconnaître les lexemes int et float; Fait
+2) Différentier un nombre entier d'un nombre à virgule au niveau lexical; Fait
+3) Ajouter le type d'une variable dans la table des variables
+
+Vérification du type:
+
+1) Addition avec des types différents;
+2) Assignation d'une variable int avec un float;
+
+Fonction:
+
+1) Ajouter et reconnaître le lexeme fonction;
+2) Coder le noeud AST Fonction;
+3) Parser la fonction
+
+Vérification du type au sein de la fonction:
+
+1) Vérification du type de retour;
+2) Vérification des arguments;
