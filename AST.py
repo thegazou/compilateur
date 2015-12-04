@@ -129,11 +129,8 @@ class EntryNode(Node):
     def __init__(self):
         Node.__init__(self, None)
 
-class FloatNode(Node):
-    type = 'float'
-
-class IntNode(Node):
-    type = 'int'
+class DeclarationNode(Node):
+    type = 'type'
 
 def addToClass(cls):
     ''' Décorateur permettant d'ajouter la fonction décorée en tant que méthode

@@ -3,8 +3,8 @@ import ply.lex as lex
 reserved_words = (
 	'while',
 	'print',
-	'float',
-	'int'
+	'int',
+	'float'
 )
 
 tokens = (
@@ -13,6 +13,7 @@ tokens = (
 	'ADD_OP',
 	'MUL_OP',
 	'IDENTIFIER',
+	'TYPE'
 ) + tuple(map(lambda s:s.upper(),reserved_words))
 
 literals = '();={}'
@@ -43,12 +44,16 @@ def t_NUMBER_INT(t):
 		t.value = 0
 	return t
 
+def t_TYPE(t):
+	r'(float|int)'
+	return t
+
 def t_IDENTIFIER(t):
 	r'[A-Za-z_]\w*'
 	if t.value in reserved_words:
 		t.type = t.value.upper()
 	return t
-	
+
 def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += len(t.value)
