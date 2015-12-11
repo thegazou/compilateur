@@ -14,7 +14,8 @@ def p_programme_recursive(p):
     p[0] = AST.ProgramNode([p[1]]+p[3].children)
 
 def p_statement(p):
-    ''' statement : assignation
+    ''' statement : declaration
+        | assignation
         | structure '''
     p[0] = p[1]
     	
@@ -46,9 +47,19 @@ def p_minus(p):
     p[0] = AST.OpNode(p[1], [p[2]])
 
 def p_declaration(p):
-    ''' declaration : TYPE IDENTIFIER '=' expression '''
-    vars[p[2]] = p[1]
-    p[0] = AST.DeclarationNode([p[1],AST.AssignNode([AST.TokenNode(p[1]),p[3]])])
+    ''' declaration : type declaration_init '''
+    #vars[p[2]] = p[1]
+    p[0] = AST.DeclarationNode([p[1],p[2]])
+
+def p_delaration_init(p):
+    ''' declaration_init : expression
+        | assignation '''
+    p[0] = p[1]
+
+def p_type(p):
+    '''type : FLOAT
+        | INT'''
+    p[0]=AST.TypeNode(p[1])
 
 def p_assign(p):
     ''' assignation : IDENTIFIER '=' expression '''
@@ -59,7 +70,7 @@ def p_error(p):
         print ("Syntax error in line %d" % p.lineno)
         'yacc.errok()'
     else:
-        print ("Sytax error: unexpected end of file!")
+        print ("Syntax error: unexpected end of file!")
 
 
 precedence = (

@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '407E8FDF419E840060B18BF986AC9A78'
+_lr_signature = '8DBB1968673D8CA1C6D8BE36DBE7C299'
     
-_lr_action_items = {'IDENTIFIER':([0,2,5,8,10,14,16,19,20,21,],[1,9,9,9,9,9,1,9,1,9,]),';':([4,6,7,9,11,13,15,17,18,24,26,27,28,],[-4,16,-3,-11,-9,-10,-5,-15,-13,-8,-7,-12,-6,]),'ADD_OP':([2,5,8,9,10,11,12,13,14,15,17,18,19,21,22,24,26,27,],[10,10,10,-11,10,-9,21,-10,10,21,21,-13,10,10,21,-8,-7,-12,]),'$end':([3,4,6,7,9,11,13,15,17,18,23,24,26,27,28,],[0,-4,-1,-3,-11,-9,-10,-5,-15,-13,-2,-8,-7,-12,-6,]),'WHILE':([0,16,20,],[2,2,2,]),'NUMBER_FLOAT':([2,5,8,10,14,19,21,],[13,13,13,13,13,13,13,]),'(':([2,5,8,10,14,19,21,],[14,14,14,14,14,14,14,]),'PRINT':([0,16,20,],[5,5,5,]),')':([9,11,13,18,22,24,26,27,],[-11,-9,-10,-13,27,-8,-7,-12,]),'=':([1,],[8,]),'MUL_OP':([9,11,12,13,15,17,18,22,24,26,27,],[-11,-9,19,-10,19,19,-13,19,-8,19,-12,]),'NUMBER_INT':([2,5,8,10,14,19,21,],[11,11,11,11,11,11,11,]),'}':([4,6,7,9,11,13,15,17,18,23,24,25,26,27,28,],[-4,-1,-3,-11,-9,-10,-5,-15,-13,-2,-8,28,-7,-12,-6,]),'{':([9,11,12,13,18,24,26,27,],[-11,-9,20,-10,-13,-8,-7,-12,]),}
+_lr_action_items = {'{':([14,15,22,24,27,32,33,34,],[-10,-11,-12,31,-14,-13,-8,-9,]),'FLOAT':([0,12,31,],[3,3,3,]),'MUL_OP':([14,15,17,20,22,23,24,26,27,30,32,33,34,],[-10,-11,-12,29,-12,29,29,29,-14,29,-13,29,-9,]),';':([1,2,4,9,14,15,16,17,19,20,22,23,27,30,32,33,34,36,],[-3,12,-4,-5,-10,-11,-15,-12,-17,-16,-12,-6,-14,-20,-13,-8,-9,-7,]),'}':([1,2,4,9,14,15,16,17,19,20,22,23,25,27,30,32,33,34,35,36,],[-3,-1,-4,-5,-10,-11,-15,-12,-17,-16,-12,-6,-2,-14,-20,-13,-8,-9,36,-7,]),'(':([3,6,8,10,11,13,18,21,28,29,],[-18,13,13,13,-19,13,13,13,13,13,]),'NUMBER_FLOAT':([3,6,8,10,11,13,18,21,28,29,],[-18,15,15,15,-19,15,15,15,15,15,]),'$end':([1,2,4,5,9,14,15,16,17,19,20,22,23,25,27,30,32,33,34,36,],[-3,-1,-4,0,-5,-10,-11,-15,-12,-17,-16,-12,-6,-2,-14,-20,-13,-8,-9,-7,]),'IDENTIFIER':([0,3,6,8,10,11,12,13,18,21,28,29,31,],[7,-18,17,22,22,-19,7,22,22,22,22,22,7,]),'PRINT':([0,12,31,],[8,8,8,]),'ADD_OP':([3,6,8,10,11,13,14,15,17,18,20,21,22,23,24,26,27,28,29,30,32,33,34,],[-18,18,18,18,-19,18,-10,-11,-12,18,28,18,-12,28,28,28,-14,18,18,28,-13,-8,-9,]),')':([14,15,22,26,27,32,33,34,],[-10,-11,-12,32,-14,-13,-8,-9,]),'WHILE':([0,12,31,],[10,10,10,]),'=':([7,17,],[21,21,]),'INT':([0,12,31,],[11,11,11,]),'NUMBER_INT':([3,6,8,10,11,13,18,21,28,29,],[-18,14,14,14,-19,14,14,14,14,14,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programme':([0,16,20,],[3,23,25,]),'expression':([2,5,8,10,14,19,21,],[12,15,17,18,22,24,26,]),'structure':([0,16,20,],[4,4,4,]),'statement':([0,16,20,],[6,6,6,]),'assignation':([0,16,20,],[7,7,7,]),}
+_lr_goto_items = {'declaration_init':([6,],[16,]),'expression':([6,8,10,13,18,21,28,29,],[20,23,24,26,27,30,33,34,]),'structure':([0,12,31,],[9,9,9,]),'programme':([0,12,31,],[5,25,35,]),'statement':([0,12,31,],[2,2,2,]),'assignation':([0,6,12,31,],[4,19,4,4,]),'type':([0,12,31,],[6,6,6,]),'declaration':([0,12,31,],[1,1,1,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,17 +28,22 @@ _lr_productions = [
   ("S' -> programme","S'",1,None,None,None),
   ('programme -> statement','programme',1,'p_programme_statement','parser.py',9),
   ('programme -> statement ; programme','programme',3,'p_programme_recursive','parser.py',13),
-  ('statement -> assignation','statement',1,'p_statement','parser.py',17),
-  ('statement -> structure','statement',1,'p_statement','parser.py',18),
-  ('statement -> PRINT expression','statement',2,'p_statement_print','parser.py',22),
-  ('structure -> WHILE expression { programme }','structure',5,'p_structure','parser.py',26),
-  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parser.py',30),
-  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parser.py',31),
-  ('expression -> NUMBER_INT','expression',1,'p_expression_num_or_var','parser.py',35),
-  ('expression -> NUMBER_FLOAT','expression',1,'p_expression_num_or_var','parser.py',36),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_num_or_var','parser.py',37),
-  ('expression -> ( expression )','expression',3,'p_expression_paren','parser.py',41),
-  ('expression -> ADD_OP expression','expression',2,'p_minus','parser.py',45),
-  ('declaration -> TYPE IDENTIFIER = expression','declaration',4,'p_declaration','parser.py',49),
-  ('assignation -> IDENTIFIER = expression','assignation',3,'p_assign','parser.py',54),
+  ('statement -> declaration','statement',1,'p_statement','parser.py',17),
+  ('statement -> assignation','statement',1,'p_statement','parser.py',18),
+  ('statement -> structure','statement',1,'p_statement','parser.py',19),
+  ('statement -> PRINT expression','statement',2,'p_statement_print','parser.py',23),
+  ('structure -> WHILE expression { programme }','structure',5,'p_structure','parser.py',27),
+  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parser.py',31),
+  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parser.py',32),
+  ('expression -> NUMBER_INT','expression',1,'p_expression_num_or_var','parser.py',36),
+  ('expression -> NUMBER_FLOAT','expression',1,'p_expression_num_or_var','parser.py',37),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_num_or_var','parser.py',38),
+  ('expression -> ( expression )','expression',3,'p_expression_paren','parser.py',42),
+  ('expression -> ADD_OP expression','expression',2,'p_minus','parser.py',46),
+  ('declaration -> type declaration_init','declaration',2,'p_declaration','parser.py',50),
+  ('declaration_init -> expression','declaration_init',1,'p_delaration_init','parser.py',55),
+  ('declaration_init -> assignation','declaration_init',1,'p_delaration_init','parser.py',56),
+  ('type -> FLOAT','type',1,'p_type','parser.py',60),
+  ('type -> INT','type',1,'p_type','parser.py',61),
+  ('assignation -> IDENTIFIER = expression','assignation',3,'p_assign','parser.py',65),
 ]

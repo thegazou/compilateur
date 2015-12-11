@@ -12,11 +12,12 @@ tokens = (
 	'NUMBER_INT',
 	'ADD_OP',
 	'MUL_OP',
-	'IDENTIFIER',
-	'TYPE'
+	'IDENTIFIER'
 ) + tuple(map(lambda s:s.upper(),reserved_words))
 
 literals = '();={}'
+
+
 
 def t_ADD_OP(t):
 	r'[+-]'
@@ -42,10 +43,6 @@ def t_NUMBER_INT(t):
 	except ValueError:
 		print ("Line %d: Problem while parsing %s!" % (t.lineno,t.value))
 		t.value = 0
-	return t
-
-def t_TYPE(t):
-	r'(float|int)'
 	return t
 
 def t_IDENTIFIER(t):
