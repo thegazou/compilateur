@@ -129,8 +129,10 @@ class EntryNode(Node):
     def __init__(self):
         Node.__init__(self, None)
 
+
 class DeclarationNode(Node):
     type = 'declaration'
+
 
 class TypeNode(Node):
     type = 'type'
@@ -141,8 +143,15 @@ class TypeNode(Node):
     def __repr__(self):
         return repr(self.tok)
 
+
 class DeclarationListNode(Node):
     type = 'decList'
+    def __init__(self, tok):
+        Node.__init__(self)
+        self.tok = tok
+
+    def __repr__(self):
+        return repr(self.tok)
 
 def addToClass(cls):
     ''' Décorateur permettant d'ajouter la fonction décorée en tant que méthode

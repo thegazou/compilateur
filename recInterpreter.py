@@ -8,8 +8,6 @@ operations = {
     '/' : lambda x,y: x/y,
 }
 
-vars ={}
-
 @addToClass(AST.ProgramNode)
 def execute(self):
     for c in self.children:
@@ -18,22 +16,35 @@ def execute(self):
 @addToClass(AST.TokenNode)
 def execute(self):
     if isinstance(self.tok, str):
+        if vars[self.tok][0] is None:
+            print ("*** warning: variable %s has not been declared!" % self.tok)
         try:
-            return vars[self.tok]
+            return vars[self.tok][1]
         except KeyError:
-            print ("*** Error: variable %s undefined!" % self.tok)
+            print ("*** warning: variable %s undefined!" % self.tok)
+        except IndexError:
+            print ("*** warning: variable %s is not set!" % self.tok)
     return self.tok
 
 @addToClass(AST.OpNode)
 def execute(self):
     args = [c.execute() for c in self.children]
+
+    # TODO test si l'operation est faite avec des variables de meme type
     if len(args) == 1:
         args.insert(0,0)
     return reduce(operations[self.op], args)
 
 @addToClass(AST.AssignNode)
 def execute(self):
-    vars[self.children[0].tok] = self.children[1].execute()
+    #test si la variable a ete declaree.
+    if len(vars[self.children[0].tok])==1:
+        vars[self.children[0].tok].append(self.children[1].execute())
+    else:
+        vars[self.children[0].tok].append(None) #permet a l'interpreteur de verifier si la variable a ete declaree.
+        vars[self.children[0].tok].append(self.children[1].execute())
+
+
 
 @addToClass(AST.PrintNode)
 def execute(self):
@@ -44,10 +55,16 @@ def execute(self):
     while self.children[0].execute():
         self.children[1].execute()
 
+@addToClass(AST.DeclarationNode)
+def execute(self):
+    self.children[1].execute()
+
 if __name__ == "__main__":
-    from parser import parse
+    from compilateur.parser import parse
     import sys
     prog = open(sys.argv[1]).read()
-    ast = parse(prog)
-    
+    parser = parse(prog)
+    ast = parser[0]
+    vars = parser[1]
     ast.execute()
+    print(vars.items())

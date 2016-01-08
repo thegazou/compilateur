@@ -7,7 +7,7 @@ _lr_method = 'LALR'
 
 _lr_signature = '8DBB1968673D8CA1C6D8BE36DBE7C299'
     
-_lr_action_items = {'{':([14,15,22,24,27,32,33,34,],[-10,-11,-12,31,-14,-13,-8,-9,]),'FLOAT':([0,12,31,],[3,3,3,]),'MUL_OP':([14,15,17,20,22,23,24,26,27,30,32,33,34,],[-10,-11,-12,29,-12,29,29,29,-14,29,-13,29,-9,]),';':([1,2,4,9,14,15,16,17,19,20,22,23,27,30,32,33,34,36,],[-3,12,-4,-5,-10,-11,-15,-12,-17,-16,-12,-6,-14,-20,-13,-8,-9,-7,]),'}':([1,2,4,9,14,15,16,17,19,20,22,23,25,27,30,32,33,34,35,36,],[-3,-1,-4,-5,-10,-11,-15,-12,-17,-16,-12,-6,-2,-14,-20,-13,-8,-9,36,-7,]),'(':([3,6,8,10,11,13,18,21,28,29,],[-18,13,13,13,-19,13,13,13,13,13,]),'NUMBER_FLOAT':([3,6,8,10,11,13,18,21,28,29,],[-18,15,15,15,-19,15,15,15,15,15,]),'$end':([1,2,4,5,9,14,15,16,17,19,20,22,23,25,27,30,32,33,34,36,],[-3,-1,-4,0,-5,-10,-11,-15,-12,-17,-16,-12,-6,-2,-14,-20,-13,-8,-9,-7,]),'IDENTIFIER':([0,3,6,8,10,11,12,13,18,21,28,29,31,],[7,-18,17,22,22,-19,7,22,22,22,22,22,7,]),'PRINT':([0,12,31,],[8,8,8,]),'ADD_OP':([3,6,8,10,11,13,14,15,17,18,20,21,22,23,24,26,27,28,29,30,32,33,34,],[-18,18,18,18,-19,18,-10,-11,-12,18,28,18,-12,28,28,28,-14,18,18,28,-13,-8,-9,]),')':([14,15,22,26,27,32,33,34,],[-10,-11,-12,32,-14,-13,-8,-9,]),'WHILE':([0,12,31,],[10,10,10,]),'=':([7,17,],[21,21,]),'INT':([0,12,31,],[11,11,11,]),'NUMBER_INT':([3,6,8,10,11,13,18,21,28,29,],[-18,14,14,14,-19,14,14,14,14,14,]),}
+_lr_action_items = {'}':([1,3,5,11,12,14,17,20,21,22,23,24,29,30,31,32,33,34,35,36,],[-3,-4,-1,-5,-11,-12,-10,-6,-17,-15,-16,-12,-14,-2,-20,36,-8,-9,-13,-7,]),'WHILE':([0,18,25,],[2,2,2,]),'NUMBER_FLOAT':([2,4,7,8,9,15,16,19,26,27,],[12,-18,12,12,-19,12,12,12,12,12,]),'PRINT':([0,18,25,],[7,7,7,]),'FLOAT':([0,18,25,],[4,4,4,]),';':([1,3,5,11,12,14,17,20,21,22,23,24,29,31,33,34,35,36,],[-3,-4,18,-5,-11,-12,-10,-6,-17,-15,-16,-12,-14,-20,-8,-9,-13,-7,]),'$end':([1,3,5,10,11,12,14,17,20,21,22,23,24,29,30,31,33,34,35,36,],[-3,-4,-1,0,-5,-11,-12,-10,-6,-17,-15,-16,-12,-14,-2,-20,-8,-9,-13,-7,]),'IDENTIFIER':([0,2,4,7,8,9,15,16,18,19,25,26,27,],[6,14,-18,14,24,-19,14,14,6,14,6,14,14,]),'(':([2,4,7,8,9,15,16,19,26,27,],[15,-18,15,15,-19,15,15,15,15,15,]),'MUL_OP':([12,13,14,17,20,23,24,28,29,31,33,34,35,],[-11,27,-12,-10,27,27,-12,27,-14,27,27,-9,-13,]),')':([12,14,17,28,29,33,34,35,],[-11,-12,-10,35,-14,-8,-9,-13,]),'{':([12,13,14,17,29,33,34,35,],[-11,25,-12,-10,-14,-8,-9,-13,]),'ADD_OP':([2,4,7,8,9,12,13,14,15,16,17,19,20,23,24,26,27,28,29,31,33,34,35,],[16,-18,16,16,-19,-11,26,-12,16,16,-10,16,26,26,-12,16,16,26,-14,26,-8,-9,-13,]),'INT':([0,18,25,],[9,9,9,]),'NUMBER_INT':([2,4,7,8,9,15,16,19,26,27,],[17,-18,17,17,-19,17,17,17,17,17,]),'=':([6,24,],[19,19,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'declaration_init':([6,],[16,]),'expression':([6,8,10,13,18,21,28,29,],[20,23,24,26,27,30,33,34,]),'structure':([0,12,31,],[9,9,9,]),'programme':([0,12,31,],[5,25,35,]),'statement':([0,12,31,],[2,2,2,]),'assignation':([0,6,12,31,],[4,19,4,4,]),'type':([0,12,31,],[6,6,6,]),'declaration':([0,12,31,],[1,1,1,]),}
+_lr_goto_items = {'declaration':([0,18,25,],[1,1,1,]),'type':([0,18,25,],[8,8,8,]),'programme':([0,18,25,],[10,30,32,]),'assignation':([0,8,18,25,],[3,21,3,3,]),'expression':([2,7,8,15,16,19,26,27,],[13,20,23,28,29,31,33,34,]),'declaration_init':([8,],[22,]),'statement':([0,18,25,],[5,5,5,]),'structure':([0,18,25,],[11,11,11,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,24 +26,24 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> programme","S'",1,None,None,None),
-  ('programme -> statement','programme',1,'p_programme_statement','parser.py',9),
-  ('programme -> statement ; programme','programme',3,'p_programme_recursive','parser.py',13),
-  ('statement -> declaration','statement',1,'p_statement','parser.py',17),
-  ('statement -> assignation','statement',1,'p_statement','parser.py',18),
-  ('statement -> structure','statement',1,'p_statement','parser.py',19),
-  ('statement -> PRINT expression','statement',2,'p_statement_print','parser.py',23),
-  ('structure -> WHILE expression { programme }','structure',5,'p_structure','parser.py',27),
-  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parser.py',31),
-  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parser.py',32),
-  ('expression -> NUMBER_INT','expression',1,'p_expression_num_or_var','parser.py',36),
-  ('expression -> NUMBER_FLOAT','expression',1,'p_expression_num_or_var','parser.py',37),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_num_or_var','parser.py',38),
-  ('expression -> ( expression )','expression',3,'p_expression_paren','parser.py',42),
-  ('expression -> ADD_OP expression','expression',2,'p_minus','parser.py',46),
-  ('declaration -> type declaration_init','declaration',2,'p_declaration','parser.py',50),
-  ('declaration_init -> expression','declaration_init',1,'p_delaration_init','parser.py',55),
-  ('declaration_init -> assignation','declaration_init',1,'p_delaration_init','parser.py',56),
-  ('type -> FLOAT','type',1,'p_type','parser.py',60),
-  ('type -> INT','type',1,'p_type','parser.py',61),
-  ('assignation -> IDENTIFIER = expression','assignation',3,'p_assign','parser.py',65),
+  ('programme -> statement','programme',1,'p_programme_statement','parser.py',10),
+  ('programme -> statement ; programme','programme',3,'p_programme_recursive','parser.py',14),
+  ('statement -> declaration','statement',1,'p_statement','parser.py',18),
+  ('statement -> assignation','statement',1,'p_statement','parser.py',19),
+  ('statement -> structure','statement',1,'p_statement','parser.py',20),
+  ('statement -> PRINT expression','statement',2,'p_statement_print','parser.py',24),
+  ('structure -> WHILE expression { programme }','structure',5,'p_structure','parser.py',28),
+  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parser.py',32),
+  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parser.py',33),
+  ('expression -> NUMBER_INT','expression',1,'p_expression_num_or_var','parser.py',37),
+  ('expression -> NUMBER_FLOAT','expression',1,'p_expression_num_or_var','parser.py',38),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_num_or_var','parser.py',39),
+  ('expression -> ( expression )','expression',3,'p_expression_paren','parser.py',43),
+  ('expression -> ADD_OP expression','expression',2,'p_minus','parser.py',47),
+  ('declaration -> type declaration_init','declaration',2,'p_declaration','parser.py',51),
+  ('declaration_init -> expression','declaration_init',1,'p_delaration_init','parser.py',64),
+  ('declaration_init -> assignation','declaration_init',1,'p_delaration_init','parser.py',65),
+  ('type -> FLOAT','type',1,'p_type','parser.py',69),
+  ('type -> INT','type',1,'p_type','parser.py',70),
+  ('assignation -> IDENTIFIER = expression','assignation',3,'p_assign','parser.py',74),
 ]

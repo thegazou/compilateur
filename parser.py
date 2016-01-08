@@ -3,7 +3,8 @@ import ply.yacc as yacc
 from lex import tokens
 import AST
 
-vars = {}
+from collections import defaultdict
+vars = defaultdict(list)
 
 def p_programme_statement(p):
     ''' programme : statement '''
@@ -48,7 +49,15 @@ def p_minus(p):
 
 def p_declaration(p):
     ''' declaration : type declaration_init '''
-    #vars[p[2]] = p[1]
+
+    try:
+        #used if it's a assignement
+        vars[p[2].children[0].tok].append(p[1].tok)
+
+    except:
+        #used if it's a tokenNod
+        vars[p[2].tok].append(p[1].tok)
+        vars[p[2].tok].append(0)
     p[0] = AST.DeclarationNode([p[1],p[2]])
 
 def p_delaration_init(p):
@@ -80,7 +89,10 @@ precedence = (
 )
 
 def parse(program):
-    return yacc.parse(program)
+    result=[]
+    result.append(yacc.parse(program))
+    result.append(vars)
+    return result
 
 yacc.yacc(outputdir='generated')
 
@@ -88,9 +100,11 @@ if __name__ == "__main__":
     import sys 
     	
     prog = open(sys.argv[1]).read()
-    result = yacc.parse(prog)
+    result=[]
+    result.append(yacc.parse(prog))
+    result.append(vars)
     if result:
-        print (result)
+        print (result[0])
             
         '''import os
         graph = result.makegraphicaltree()
