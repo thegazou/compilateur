@@ -47,7 +47,8 @@ def p_minus(p):
     p[0] = AST.OpNode(p[1], [p[2]])
 
 def p_declaration(p):
-    ''' declaration : type declaration_init '''
+    ''' declaration : type declaration_init 
+		| function'''
     #vars[p[2]] = p[1]
     p[0] = AST.DeclarationNode([p[1],p[2]])
 
@@ -64,6 +65,11 @@ def p_type(p):
 def p_assign(p):
     ''' assignation : IDENTIFIER '=' expression '''
     p[0] = AST.AssignNode([AST.TokenNode(p[1]),p[3]])
+
+def p_function(p):
+	''' function : type IDENTIFIER '('  ')' '{' statement '}'
+		| IDENTIFIER '('  ')' '{' statement '}' '''
+	p[0] = AST.FunctionNode(AST.TypeNode(p[1]), p[2])
 
 def p_error(p):
     if p:
@@ -92,10 +98,10 @@ if __name__ == "__main__":
     if result:
         print (result)
             
-        '''import os
+        import os
         graph = result.makegraphicaltree()
         name = os.path.splitext(sys.argv[1])[0]+'-ast.pdf'
         graph.write_pdf(name) 
-        print ("wrote ast to", name)'''
+        print ("wrote ast to", name)
     else:
         print ("Parsing returned no result!")

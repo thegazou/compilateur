@@ -56,7 +56,7 @@ class Node:
                     edge.set_label(str(i))
                 dot.add_edge(edge)
                 #Workaround for a bug in pydot 1.0.2 on Windows:
-                #dot.set_graphviz_executables({'dot': r'C:\Program Files\Graphviz2.16\bin\dot.exe'})
+                dot.set_graphviz_executables({'dot': r'C:\Program Files (x86)\Graphviz2.38\bin\dot.exe'})
             return dot
         
     def threadTree(self, graph, seen = None, col=0):
@@ -93,7 +93,7 @@ class Node:
         
 class ProgramNode(Node):
     type = 'Program'
-        
+
 class TokenNode(Node):
     type = 'token'
     def __init__(self, tok):
@@ -114,7 +114,7 @@ class OpNode(Node):
         
     def __repr__(self):
         return "%s (%s)" % (self.op, self.nbargs)
-    
+
 class AssignNode(Node):
     type = '='
     
@@ -129,20 +129,39 @@ class EntryNode(Node):
     def __init__(self):
         Node.__init__(self, None)
 
+
 class DeclarationNode(Node):
-    type = 'declaration'
-
-class TypeNode(Node):
-    type = 'type'
-    def __init__(self, tok):
-        Node.__init__(self)
-        self.tok = tok
-
-    def __repr__(self):
-        return repr(self.tok)
+    type = 'Declaration'
 
 class DeclarationListNode(Node):
     type = 'decList'
+
+class VariableNode(Node):
+    type = 'Variable'
+
+class FunctionNode(Node):
+    type = 'Function'
+
+class TypeNode(Node):
+    type = 'type'
+
+class ExpressionNode(Node):
+    type = 'expression'
+
+class CompoundStmtNode(Node):
+    type = 'compound stmt'
+
+class ReturnNode(Node):
+    type = 'return'
+
+class StatementListNode(Node):
+    type = 'statement list'
+
+class ExpressionNode(Node):
+    type = 'expression'
+
+class SimpleExpressionNode(Node):
+    type = ' simple expression'
 
 def addToClass(cls):
     ''' Décorateur permettant d'ajouter la fonction décorée en tant que méthode

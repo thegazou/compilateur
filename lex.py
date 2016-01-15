@@ -1,51 +1,42 @@
 import ply.lex as lex
 
 reserved_words = (
-	'while',
-	'print',
+	'void',
 	'int',
-	'float'
+	'float',
+	'bool',
+	'char',
+	'return'
 )
 
 tokens = (
-	'NUMBER_FLOAT',
-	'NUMBER_INT',
-	'ADD_OP',
+	'NUMBER',
+	'SUM_OP',
 	'MUL_OP',
-	'IDENTIFIER'
+	'ID'
 ) + tuple(map(lambda s:s.upper(),reserved_words))
 
-literals = '();={}'
+literals = '();=<>{}'
 
 
 
-def t_ADD_OP(t):
+def t_SUM_OP(t):
 	r'[+-]'
 	return t
 	
 def t_MUL_OP(t):
-	r'[*/]'
+	r'[*/%]'
 	return t
 
-def t_NUMBER_FLOAT(t):
-	r'\d+(\.\d+)+'
-	try:
-		t.value = float(t.value)
-	except ValueError:
-		print ("Line %d: Problem while parsing %s!" % (t.lineno,t.value))
-		t.value = 0
-	return t
-
-def t_NUMBER_INT(t):
-	r'\d+'
+def t_NUMBER(t):
+	r'\d+(\.\d+)?'
 	try:
 		t.value = int(t.value)
-	except ValueError:
-		print ("Line %d: Problem while parsing %s!" % (t.lineno,t.value))
-		t.value = 0
+	except:
+		t.value = float(t.value)
 	return t
 
-def t_IDENTIFIER(t):
+def t_ID(t):
 	r'[A-Za-z_]\w*'
 	if t.value in reserved_words:
 		t.type = t.value.upper()
