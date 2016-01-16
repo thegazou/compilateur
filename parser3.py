@@ -39,7 +39,7 @@ def p_expression_stmt(p):
 	p[0] = AST.ExpressionNode(p[1])
 
 def p_compound_stmt(p):
-	''' compound_stmt : '{' statement_list '}' '''
+	''' compound_stmt : '{' expression '}' '''
 	p[0] = AST.CompoundStmtNode(p[2])
 
 def p_return_stmt(p):
@@ -47,22 +47,20 @@ def p_return_stmt(p):
 					| RETURN expression ';' '''
 	p[0] = AST.ReturnNode(p[1], p[2])
 
-def p_statement_list(p):
-	''' statement_list : statement_list statement '''
-	p[0] = AST.StatementListNode(p[1], p[2])
-
 def p_expression(p):
-	''' expression : mutable '=' expression
-					| simple_expression'''
+	''' expression : mutable '=' simple_expression
+					| mutable '=' mutable 
+					| simple_expression '''
 	p[0] = AST.ExpressionNode(p[1], p[3])
 
 def p_simple_expression(p):
-	''' simple_expression : expression SUM_OP expression
-							| expression MUL_OP expression'''
-	p[0] = AST.ExpressionNode((p[1]),p[3])
+	''' simple_expression : mutable SUM_OP mutable
+							| mutable MUL_OP mutable'''
+	p[0] = AST.ExpressionNode(p[1], p[3])
 
 def p_mutable(p):
-	''' mutable : ID '''
+	''' mutable : ID
+				| NUMBER '''
 	p[0] = AST.TokenNode(p[1])
 
 def p_type_specifier(p):
@@ -85,14 +83,12 @@ precedence = (
 )
 
 
-
-
 def p_error(p):
 	if p:
 		print ("Syntax error in line %d" % p.lineno)
 		yacc.errok()
 	else:
-		print ("Sytax error: unexpected end of file!")
+		print ("Syntax error: unexpected end of file!")
 
 def parse(program):
 	return yacc.parse(program)
