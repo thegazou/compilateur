@@ -56,7 +56,7 @@ class Node:
                     edge.set_label(str(i))
                 dot.add_edge(edge)
                 #Workaround for a bug in pydot 1.0.2 on Windows:
-                dot.set_graphviz_executables({'dot': r'C:\Program Files (x86)\Graphviz2.38\bin\dot.exe'})
+                #dot.set_graphviz_executables({'dot': r'C:\Program Files (x86)\Graphviz2.38\bin\dot.exe'})
             return dot
         
     def threadTree(self, graph, seen = None, col=0):
@@ -148,14 +148,14 @@ class TypeNode(Node):
 class ExpressionNode(Node):
     type = 'expression'
 
-class CompoundStmtNode(Node):
-    type = 'compound stmt'
-
 class ReturnNode(Node):
     type = 'return'
 
 class StatementListNode(Node):
     type = 'statement list'
+
+class ExpressionStmtNode(Node):
+    type = 'expression stmt'
 
 class ExpressionNode(Node):
     type = 'expression'

@@ -12,7 +12,11 @@ def p_program(p):
 def p_declaration_list(p):
 	''' declaration_list : declaration_list declaration 
 							| declaration '''
-	p[0] = AST.DeclarationNode(p[1], p[2])
+	if len(p) == 3:
+		p[0] = AST.DeclarationNode([p[1], p[2]])
+	else:
+		p[0] = AST.DeclarationNode(p[1])
+	
 
 def p_declaration(p):
 	''' declaration : var_declaration
@@ -21,11 +25,11 @@ def p_declaration(p):
 
 def p_var_declaration(p):
 	''' var_declaration : type_specifier ID '''
-	p[0] = AST.VariableNode(p[1], p[2])
+	p[0] = AST.VariableNode([p[1], p[2]])
 
 def p_fun_declaration(p):
 	''' fun_declaration : type_specifier ID '(' ')' statement '''
-	p[0] = AST.FunctionNode(p[1], p[2], p[5])
+	p[0] = AST.FunctionNode([p[1], p[2], p[5]])
 
 def p_statement(p):
 	''' statement : expression_stmt
@@ -36,11 +40,11 @@ def p_statement(p):
 def p_expression_stmt(p):
 	''' expression_stmt : expression ';'
 						| ';' '''
-	p[0] = AST.ExpressionNode(p[1])
+	p[0] = AST.ExpressionStmtNode(p[1])
 
 def p_compound_stmt(p):
 	''' compound_stmt : '{' expression '}' '''
-	p[0] = AST.CompoundStmtNode(p[2])
+	p[0] = p[2]
 
 def p_return_stmt(p):
 	''' return_stmt : RETURN ';'
@@ -51,12 +55,12 @@ def p_expression(p):
 	''' expression : mutable '=' simple_expression
 					| mutable '=' mutable 
 					| simple_expression '''
-	p[0] = AST.ExpressionNode(p[1], p[3])
+	p[0] = AST.ExpressionNode([p[1], p[3]])
 
 def p_simple_expression(p):
 	''' simple_expression : mutable SUM_OP mutable
 							| mutable MUL_OP mutable'''
-	p[0] = AST.ExpressionNode(p[1], p[3])
+	p[0] = AST.ExpressionNode([p[1], p[3]])
 
 def p_mutable(p):
 	''' mutable : ID

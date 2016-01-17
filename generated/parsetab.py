@@ -7,7 +7,7 @@ _lr_method = 'LALR'
 
 _lr_signature = 'D970DB7D2FC320741545DC06581497C7'
     
-_lr_action_items = {'RETURN':([15,23,],[27,27,]),'{':([15,23,],[28,28,]),'(':([13,],[14,]),')':([14,],[15,]),'$end':([1,2,6,7,9,12,13,20,21,22,24,25,29,33,35,41,42,],[-4,-1,-3,-5,0,-2,-6,-9,-10,-12,-7,-8,-11,-28,-14,-15,-13,]),'}':([18,19,26,36,37,38,39,40,],[-21,-18,-22,42,-19,-16,-17,-20,]),'ID':([3,4,5,8,10,11,15,23,27,28,30,31,32,],[-25,-26,13,-24,-23,-27,18,18,18,18,18,18,18,]),'BOOL':([0,1,2,6,7,12,13,20,21,22,24,25,29,33,35,41,42,],[4,-4,4,-3,-5,-2,-6,-9,-10,-12,-7,-8,-11,-28,-14,-15,-13,]),'FLOAT':([0,1,2,6,7,12,13,20,21,22,24,25,29,33,35,41,42,],[3,-4,3,-3,-5,-2,-6,-9,-10,-12,-7,-8,-11,-28,-14,-15,-13,]),'NUMBER':([15,23,27,28,30,31,32,],[26,26,26,26,26,26,26,]),'=':([17,18,26,],[31,-21,-22,]),';':([15,16,18,19,23,26,27,34,37,38,39,40,],[22,29,-21,-18,22,-22,35,41,-19,-16,-17,-20,]),'INT':([0,1,2,6,7,12,13,20,21,22,24,25,29,33,35,41,42,],[8,-4,8,-3,-5,-2,-6,-9,-10,-12,-7,-8,-11,-28,-14,-15,-13,]),'SUM_OP':([15,17,18,23,26,39,],[23,30,-21,23,-22,30,]),'MUL_OP':([17,18,26,39,],[32,-21,-22,32,]),'VOID':([0,1,2,6,7,12,13,20,21,22,24,25,29,33,35,41,42,],[10,-4,10,-3,-5,-2,-6,-9,-10,-12,-7,-8,-11,-28,-14,-15,-13,]),'CHAR':([0,1,2,6,7,12,13,20,21,22,24,25,29,33,35,41,42,],[11,-4,11,-3,-5,-2,-6,-9,-10,-12,-7,-8,-11,-28,-14,-15,-13,]),}
+_lr_action_items = {'$end':([1,6,9,10,11,12,13,16,17,24,25,26,30,32,33,37,38,],[-1,0,-3,-5,-4,-2,-6,-7,-8,-10,-9,-12,-28,-14,-11,-13,-15,]),'BOOL':([0,1,9,10,11,12,13,16,17,24,25,26,30,32,33,37,38,],[2,2,-3,-5,-4,-2,-6,-7,-8,-10,-9,-12,-28,-14,-11,-13,-15,]),'ID':([2,3,4,5,7,8,15,19,21,23,34,35,36,],[-26,-23,13,-25,-27,-24,18,18,18,18,18,18,18,]),'VOID':([0,1,9,10,11,12,13,16,17,24,25,26,30,32,33,37,38,],[3,3,-3,-5,-4,-2,-6,-7,-8,-10,-9,-12,-28,-14,-11,-13,-15,]),'FLOAT':([0,1,9,10,11,12,13,16,17,24,25,26,30,32,33,37,38,],[5,5,-3,-5,-4,-2,-6,-7,-8,-10,-9,-12,-28,-14,-11,-13,-15,]),';':([15,18,20,21,22,23,27,31,39,40,41,42,],[26,-21,-18,26,-22,32,33,38,-19,-16,-17,-20,]),'MUL_OP':([18,22,28,41,],[-21,-22,36,36,]),')':([14,],[15,]),'(':([13,],[14,]),'SUM_OP':([15,18,21,22,28,41,],[21,-21,21,-22,34,34,]),'NUMBER':([15,19,21,23,34,35,36,],[22,22,22,22,22,22,22,]),'INT':([0,1,9,10,11,12,13,16,17,24,25,26,30,32,33,37,38,],[8,8,-3,-5,-4,-2,-6,-7,-8,-10,-9,-12,-28,-14,-11,-13,-15,]),'CHAR':([0,1,9,10,11,12,13,16,17,24,25,26,30,32,33,37,38,],[7,7,-3,-5,-4,-2,-6,-7,-8,-10,-9,-12,-28,-14,-11,-13,-15,]),'}':([18,20,22,29,39,40,41,42,],[-21,-18,-22,37,-19,-16,-17,-20,]),'RETURN':([15,21,],[23,23,]),'{':([15,21,],[19,19,]),'=':([18,22,28,],[-21,-22,35,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([15,23,27,28,],[16,16,34,36,]),'var_declaration':([0,2,],[1,1,]),'mutable':([15,23,27,28,30,31,32,],[17,17,17,17,37,39,40,]),'declaration_list':([0,],[2,]),'type_specifier':([0,2,],[5,5,]),'declaration':([0,2,],[6,12,]),'compound_stmt':([15,23,],[20,20,]),'return_stmt':([15,23,],[21,21,]),'simple_expression':([15,23,27,28,31,],[19,19,19,19,38,]),'fun_declaration':([0,2,],[7,7,]),'statement':([15,23,],[24,33,]),'expression_stmt':([15,23,],[25,25,]),'program':([0,],[9,]),}
+_lr_goto_items = {'statement':([15,21,],[16,30,]),'declaration_list':([0,],[1,]),'expression_stmt':([15,21,],[17,17,]),'type_specifier':([0,1,],[4,4,]),'simple_expression':([15,19,21,23,35,],[20,20,20,20,40,]),'mutable':([15,19,21,23,34,35,36,],[28,28,28,28,39,41,42,]),'program':([0,],[6,]),'fun_declaration':([0,1,],[10,10,]),'declaration':([0,1,],[9,12,]),'return_stmt':([15,21,],[24,24,]),'compound_stmt':([15,21,],[25,25,]),'expression':([15,19,21,23,],[27,29,27,31,]),'var_declaration':([0,1,],[11,11,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -29,29 +29,29 @@ _lr_productions = [
   ('program -> declaration_list','program',1,'p_program','parser3.py',9),
   ('declaration_list -> declaration_list declaration','declaration_list',2,'p_declaration_list','parser3.py',13),
   ('declaration_list -> declaration','declaration_list',1,'p_declaration_list','parser3.py',14),
-  ('declaration -> var_declaration','declaration',1,'p_declaration','parser3.py',18),
-  ('declaration -> fun_declaration','declaration',1,'p_declaration','parser3.py',19),
-  ('var_declaration -> type_specifier ID','var_declaration',2,'p_var_declaration','parser3.py',23),
-  ('fun_declaration -> type_specifier ID ( ) statement','fun_declaration',5,'p_fun_declaration','parser3.py',27),
-  ('statement -> expression_stmt','statement',1,'p_statement','parser3.py',31),
-  ('statement -> compound_stmt','statement',1,'p_statement','parser3.py',32),
-  ('statement -> return_stmt','statement',1,'p_statement','parser3.py',33),
-  ('expression_stmt -> expression ;','expression_stmt',2,'p_expression_stmt','parser3.py',37),
-  ('expression_stmt -> ;','expression_stmt',1,'p_expression_stmt','parser3.py',38),
-  ('compound_stmt -> { expression }','compound_stmt',3,'p_compound_stmt','parser3.py',42),
-  ('return_stmt -> RETURN ;','return_stmt',2,'p_return_stmt','parser3.py',46),
-  ('return_stmt -> RETURN expression ;','return_stmt',3,'p_return_stmt','parser3.py',47),
-  ('expression -> mutable = simple_expression','expression',3,'p_expression','parser3.py',51),
-  ('expression -> mutable = mutable','expression',3,'p_expression','parser3.py',52),
-  ('expression -> simple_expression','expression',1,'p_expression','parser3.py',53),
-  ('simple_expression -> mutable SUM_OP mutable','simple_expression',3,'p_simple_expression','parser3.py',57),
-  ('simple_expression -> mutable MUL_OP mutable','simple_expression',3,'p_simple_expression','parser3.py',58),
-  ('mutable -> ID','mutable',1,'p_mutable','parser3.py',62),
-  ('mutable -> NUMBER','mutable',1,'p_mutable','parser3.py',63),
-  ('type_specifier -> VOID','type_specifier',1,'p_type_specifier','parser3.py',67),
-  ('type_specifier -> INT','type_specifier',1,'p_type_specifier','parser3.py',68),
-  ('type_specifier -> FLOAT','type_specifier',1,'p_type_specifier','parser3.py',69),
-  ('type_specifier -> BOOL','type_specifier',1,'p_type_specifier','parser3.py',70),
-  ('type_specifier -> CHAR','type_specifier',1,'p_type_specifier','parser3.py',71),
-  ('statement -> SUM_OP statement','statement',2,'p_minus','parser3.py',75),
+  ('declaration -> var_declaration','declaration',1,'p_declaration','parser3.py',22),
+  ('declaration -> fun_declaration','declaration',1,'p_declaration','parser3.py',23),
+  ('var_declaration -> type_specifier ID','var_declaration',2,'p_var_declaration','parser3.py',27),
+  ('fun_declaration -> type_specifier ID ( ) statement','fun_declaration',5,'p_fun_declaration','parser3.py',31),
+  ('statement -> expression_stmt','statement',1,'p_statement','parser3.py',35),
+  ('statement -> compound_stmt','statement',1,'p_statement','parser3.py',36),
+  ('statement -> return_stmt','statement',1,'p_statement','parser3.py',37),
+  ('expression_stmt -> expression ;','expression_stmt',2,'p_expression_stmt','parser3.py',41),
+  ('expression_stmt -> ;','expression_stmt',1,'p_expression_stmt','parser3.py',42),
+  ('compound_stmt -> { expression }','compound_stmt',3,'p_compound_stmt','parser3.py',46),
+  ('return_stmt -> RETURN ;','return_stmt',2,'p_return_stmt','parser3.py',50),
+  ('return_stmt -> RETURN expression ;','return_stmt',3,'p_return_stmt','parser3.py',51),
+  ('expression -> mutable = simple_expression','expression',3,'p_expression','parser3.py',55),
+  ('expression -> mutable = mutable','expression',3,'p_expression','parser3.py',56),
+  ('expression -> simple_expression','expression',1,'p_expression','parser3.py',57),
+  ('simple_expression -> mutable SUM_OP mutable','simple_expression',3,'p_simple_expression','parser3.py',61),
+  ('simple_expression -> mutable MUL_OP mutable','simple_expression',3,'p_simple_expression','parser3.py',62),
+  ('mutable -> ID','mutable',1,'p_mutable','parser3.py',66),
+  ('mutable -> NUMBER','mutable',1,'p_mutable','parser3.py',67),
+  ('type_specifier -> VOID','type_specifier',1,'p_type_specifier','parser3.py',71),
+  ('type_specifier -> INT','type_specifier',1,'p_type_specifier','parser3.py',72),
+  ('type_specifier -> FLOAT','type_specifier',1,'p_type_specifier','parser3.py',73),
+  ('type_specifier -> BOOL','type_specifier',1,'p_type_specifier','parser3.py',74),
+  ('type_specifier -> CHAR','type_specifier',1,'p_type_specifier','parser3.py',75),
+  ('statement -> SUM_OP statement','statement',2,'p_minus','parser3.py',79),
 ]
