@@ -53,14 +53,22 @@ def p_return_stmt(p):
 
 def p_expression(p):
 	''' expression : mutable '=' simple_expression
-					| mutable '=' mutable 
+					| mutable '=' mutable
+					| mutable '=' call
 					| simple_expression '''
-	p[0] = AST.ExpressionNode([p[1], p[3]])
+	if len(p) == 3:
+		p[0] = AST.ExpressionNode([p[1], p[3]])
+	else:
+		p[0] = AST.ExpressionNode(p[1])
 
 def p_simple_expression(p):
 	''' simple_expression : mutable SUM_OP mutable
 							| mutable MUL_OP mutable'''
 	p[0] = AST.ExpressionNode([p[1], p[3]])
+
+def p_call(p):
+	''' call : ID '(' ')' '''
+	p[0] = p[1]
 
 def p_mutable(p):
 	''' mutable : ID

@@ -20,51 +20,54 @@ Rule 14    return_stmt -> RETURN ;
 Rule 15    return_stmt -> RETURN expression ;
 Rule 16    expression -> mutable = simple_expression
 Rule 17    expression -> mutable = mutable
-Rule 18    expression -> simple_expression
-Rule 19    simple_expression -> mutable SUM_OP mutable
-Rule 20    simple_expression -> mutable MUL_OP mutable
-Rule 21    mutable -> ID
-Rule 22    mutable -> NUMBER
-Rule 23    type_specifier -> VOID
-Rule 24    type_specifier -> INT
-Rule 25    type_specifier -> FLOAT
-Rule 26    type_specifier -> BOOL
-Rule 27    type_specifier -> CHAR
-Rule 28    statement -> SUM_OP statement
+Rule 18    expression -> mutable = call
+Rule 19    expression -> simple_expression
+Rule 20    simple_expression -> mutable SUM_OP mutable
+Rule 21    simple_expression -> mutable MUL_OP mutable
+Rule 22    call -> ID ( )
+Rule 23    mutable -> ID
+Rule 24    mutable -> NUMBER
+Rule 25    type_specifier -> VOID
+Rule 26    type_specifier -> INT
+Rule 27    type_specifier -> FLOAT
+Rule 28    type_specifier -> BOOL
+Rule 29    type_specifier -> CHAR
+Rule 30    statement -> SUM_OP statement
 
 Terminals, with rules where they appear
 
-(                    : 7
-)                    : 7
+(                    : 7 22
+)                    : 7 22
 ;                    : 11 12 14 15
-=                    : 16 17
-BOOL                 : 26
-CHAR                 : 27
-FLOAT                : 25
-ID                   : 6 7 21
-INT                  : 24
-MUL_OP               : 20
-NUMBER               : 22
+=                    : 16 17 18
+BOOL                 : 28
+CHAR                 : 29
+FLOAT                : 27
+ID                   : 6 7 22 23
+INT                  : 26
+MUL_OP               : 21
+NUMBER               : 24
 RETURN               : 14 15
-SUM_OP               : 19 28
-VOID                 : 23
+SUM_OP               : 20 30
+VOID                 : 25
 error                : 
 {                    : 13
 }                    : 13
 
 Nonterminals, with rules where they appear
 
+call                 : 18
 compound_stmt        : 9
 declaration          : 2 3
 declaration_list     : 1 2
 expression           : 11 13 15
 expression_stmt      : 8
 fun_declaration      : 5
-mutable              : 16 17 17 19 19 20 20
+mutable              : 16 17 17 18 20 20 21 21
 program              : 0
 return_stmt          : 10
-simple_expression    : 16 18
-statement            : 7 28
+simple_expression    : 16 19
+statement            : 7 30
 type_specifier       : 6 7
 var_declaration      : 4
 
@@ -80,26 +83,58 @@ state 0
     (5) declaration -> . fun_declaration
     (6) var_declaration -> . type_specifier ID
     (7) fun_declaration -> . type_specifier ID ( ) statement
-    (23) type_specifier -> . VOID
-    (24) type_specifier -> . INT
-    (25) type_specifier -> . FLOAT
-    (26) type_specifier -> . BOOL
-    (27) type_specifier -> . CHAR
+    (25) type_specifier -> . VOID
+    (26) type_specifier -> . INT
+    (27) type_specifier -> . FLOAT
+    (28) type_specifier -> . BOOL
+    (29) type_specifier -> . CHAR
 
-    VOID            shift and go to state 3
-    INT             shift and go to state 8
-    FLOAT           shift and go to state 5
-    BOOL            shift and go to state 2
-    CHAR            shift and go to state 7
+    VOID            shift and go to state 11
+    INT             shift and go to state 6
+    FLOAT           shift and go to state 7
+    BOOL            shift and go to state 1
+    CHAR            shift and go to state 3
 
-    declaration_list               shift and go to state 1
-    program                        shift and go to state 6
-    type_specifier                 shift and go to state 4
-    declaration                    shift and go to state 9
-    var_declaration                shift and go to state 11
-    fun_declaration                shift and go to state 10
+    declaration                    shift and go to state 8
+    fun_declaration                shift and go to state 9
+    type_specifier                 shift and go to state 10
+    program                        shift and go to state 4
+    var_declaration                shift and go to state 2
+    declaration_list               shift and go to state 5
 
 state 1
+
+    (28) type_specifier -> BOOL .
+
+    ID              reduce using rule 28 (type_specifier -> BOOL .)
+
+
+state 2
+
+    (4) declaration -> var_declaration .
+
+    VOID            reduce using rule 4 (declaration -> var_declaration .)
+    INT             reduce using rule 4 (declaration -> var_declaration .)
+    FLOAT           reduce using rule 4 (declaration -> var_declaration .)
+    BOOL            reduce using rule 4 (declaration -> var_declaration .)
+    CHAR            reduce using rule 4 (declaration -> var_declaration .)
+    $end            reduce using rule 4 (declaration -> var_declaration .)
+
+
+state 3
+
+    (29) type_specifier -> CHAR .
+
+    ID              reduce using rule 29 (type_specifier -> CHAR .)
+
+
+state 4
+
+    (0) S' -> program .
+
+
+
+state 5
 
     (1) program -> declaration_list .
     (2) declaration_list -> declaration_list . declaration
@@ -107,74 +142,39 @@ state 1
     (5) declaration -> . fun_declaration
     (6) var_declaration -> . type_specifier ID
     (7) fun_declaration -> . type_specifier ID ( ) statement
-    (23) type_specifier -> . VOID
-    (24) type_specifier -> . INT
-    (25) type_specifier -> . FLOAT
-    (26) type_specifier -> . BOOL
-    (27) type_specifier -> . CHAR
+    (25) type_specifier -> . VOID
+    (26) type_specifier -> . INT
+    (27) type_specifier -> . FLOAT
+    (28) type_specifier -> . BOOL
+    (29) type_specifier -> . CHAR
 
     $end            reduce using rule 1 (program -> declaration_list .)
-    VOID            shift and go to state 3
-    INT             shift and go to state 8
-    FLOAT           shift and go to state 5
-    BOOL            shift and go to state 2
-    CHAR            shift and go to state 7
+    VOID            shift and go to state 11
+    INT             shift and go to state 6
+    FLOAT           shift and go to state 7
+    BOOL            shift and go to state 1
+    CHAR            shift and go to state 3
 
-    type_specifier                 shift and go to state 4
     declaration                    shift and go to state 12
-    var_declaration                shift and go to state 11
-    fun_declaration                shift and go to state 10
-
-state 2
-
-    (26) type_specifier -> BOOL .
-
-    ID              reduce using rule 26 (type_specifier -> BOOL .)
-
-
-state 3
-
-    (23) type_specifier -> VOID .
-
-    ID              reduce using rule 23 (type_specifier -> VOID .)
-
-
-state 4
-
-    (6) var_declaration -> type_specifier . ID
-    (7) fun_declaration -> type_specifier . ID ( ) statement
-
-    ID              shift and go to state 13
-
-
-state 5
-
-    (25) type_specifier -> FLOAT .
-
-    ID              reduce using rule 25 (type_specifier -> FLOAT .)
-
+    fun_declaration                shift and go to state 9
+    type_specifier                 shift and go to state 10
+    var_declaration                shift and go to state 2
 
 state 6
 
-    (0) S' -> program .
+    (26) type_specifier -> INT .
 
+    ID              reduce using rule 26 (type_specifier -> INT .)
 
 
 state 7
 
-    (27) type_specifier -> CHAR .
+    (27) type_specifier -> FLOAT .
 
-    ID              reduce using rule 27 (type_specifier -> CHAR .)
+    ID              reduce using rule 27 (type_specifier -> FLOAT .)
 
 
 state 8
-
-    (24) type_specifier -> INT .
-
-    ID              reduce using rule 24 (type_specifier -> INT .)
-
-
-state 9
 
     (3) declaration_list -> declaration .
 
@@ -186,7 +186,7 @@ state 9
     $end            reduce using rule 3 (declaration_list -> declaration .)
 
 
-state 10
+state 9
 
     (5) declaration -> fun_declaration .
 
@@ -198,16 +198,19 @@ state 10
     $end            reduce using rule 5 (declaration -> fun_declaration .)
 
 
+state 10
+
+    (6) var_declaration -> type_specifier . ID
+    (7) fun_declaration -> type_specifier . ID ( ) statement
+
+    ID              shift and go to state 13
+
+
 state 11
 
-    (4) declaration -> var_declaration .
+    (25) type_specifier -> VOID .
 
-    VOID            reduce using rule 4 (declaration -> var_declaration .)
-    INT             reduce using rule 4 (declaration -> var_declaration .)
-    FLOAT           reduce using rule 4 (declaration -> var_declaration .)
-    BOOL            reduce using rule 4 (declaration -> var_declaration .)
-    CHAR            reduce using rule 4 (declaration -> var_declaration .)
-    $end            reduce using rule 4 (declaration -> var_declaration .)
+    ID              reduce using rule 25 (type_specifier -> VOID .)
 
 
 state 12
@@ -249,7 +252,7 @@ state 15
     (8) statement -> . expression_stmt
     (9) statement -> . compound_stmt
     (10) statement -> . return_stmt
-    (28) statement -> . SUM_OP statement
+    (30) statement -> . SUM_OP statement
     (11) expression_stmt -> . expression ;
     (12) expression_stmt -> . ;
     (13) compound_stmt -> . { expression }
@@ -257,155 +260,29 @@ state 15
     (15) return_stmt -> . RETURN expression ;
     (16) expression -> . mutable = simple_expression
     (17) expression -> . mutable = mutable
-    (18) expression -> . simple_expression
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
-    (19) simple_expression -> . mutable SUM_OP mutable
-    (20) simple_expression -> . mutable MUL_OP mutable
+    (18) expression -> . mutable = call
+    (19) expression -> . simple_expression
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
+    (20) simple_expression -> . mutable SUM_OP mutable
+    (21) simple_expression -> . mutable MUL_OP mutable
 
-    SUM_OP          shift and go to state 21
-    ;               shift and go to state 26
-    {               shift and go to state 19
-    RETURN          shift and go to state 23
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
+    SUM_OP          shift and go to state 26
+    ;               shift and go to state 20
+    {               shift and go to state 27
+    RETURN          shift and go to state 18
+    ID              shift and go to state 24
+    NUMBER          shift and go to state 23
 
-    statement                      shift and go to state 16
-    expression_stmt                shift and go to state 17
-    return_stmt                    shift and go to state 24
-    compound_stmt                  shift and go to state 25
-    simple_expression              shift and go to state 20
-    expression                     shift and go to state 27
-    mutable                        shift and go to state 28
+    expression_stmt                shift and go to state 21
+    statement                      shift and go to state 22
+    return_stmt                    shift and go to state 16
+    compound_stmt                  shift and go to state 19
+    expression                     shift and go to state 25
+    mutable                        shift and go to state 17
+    simple_expression              shift and go to state 28
 
 state 16
-
-    (7) fun_declaration -> type_specifier ID ( ) statement .
-
-    VOID            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
-    INT             reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
-    FLOAT           reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
-    BOOL            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
-    CHAR            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
-    $end            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
-
-
-state 17
-
-    (8) statement -> expression_stmt .
-
-    VOID            reduce using rule 8 (statement -> expression_stmt .)
-    INT             reduce using rule 8 (statement -> expression_stmt .)
-    FLOAT           reduce using rule 8 (statement -> expression_stmt .)
-    BOOL            reduce using rule 8 (statement -> expression_stmt .)
-    CHAR            reduce using rule 8 (statement -> expression_stmt .)
-    $end            reduce using rule 8 (statement -> expression_stmt .)
-
-
-state 18
-
-    (21) mutable -> ID .
-
-    =               reduce using rule 21 (mutable -> ID .)
-    SUM_OP          reduce using rule 21 (mutable -> ID .)
-    MUL_OP          reduce using rule 21 (mutable -> ID .)
-    ;               reduce using rule 21 (mutable -> ID .)
-    }               reduce using rule 21 (mutable -> ID .)
-
-
-state 19
-
-    (13) compound_stmt -> { . expression }
-    (16) expression -> . mutable = simple_expression
-    (17) expression -> . mutable = mutable
-    (18) expression -> . simple_expression
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
-    (19) simple_expression -> . mutable SUM_OP mutable
-    (20) simple_expression -> . mutable MUL_OP mutable
-
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
-
-    expression                     shift and go to state 29
-    simple_expression              shift and go to state 20
-    mutable                        shift and go to state 28
-
-state 20
-
-    (18) expression -> simple_expression .
-
-    ;               reduce using rule 18 (expression -> simple_expression .)
-    }               reduce using rule 18 (expression -> simple_expression .)
-
-
-state 21
-
-    (28) statement -> SUM_OP . statement
-    (8) statement -> . expression_stmt
-    (9) statement -> . compound_stmt
-    (10) statement -> . return_stmt
-    (28) statement -> . SUM_OP statement
-    (11) expression_stmt -> . expression ;
-    (12) expression_stmt -> . ;
-    (13) compound_stmt -> . { expression }
-    (14) return_stmt -> . RETURN ;
-    (15) return_stmt -> . RETURN expression ;
-    (16) expression -> . mutable = simple_expression
-    (17) expression -> . mutable = mutable
-    (18) expression -> . simple_expression
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
-    (19) simple_expression -> . mutable SUM_OP mutable
-    (20) simple_expression -> . mutable MUL_OP mutable
-
-    SUM_OP          shift and go to state 21
-    ;               shift and go to state 26
-    {               shift and go to state 19
-    RETURN          shift and go to state 23
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
-
-    statement                      shift and go to state 30
-    expression_stmt                shift and go to state 17
-    expression                     shift and go to state 27
-    compound_stmt                  shift and go to state 25
-    simple_expression              shift and go to state 20
-    return_stmt                    shift and go to state 24
-    mutable                        shift and go to state 28
-
-state 22
-
-    (22) mutable -> NUMBER .
-
-    =               reduce using rule 22 (mutable -> NUMBER .)
-    SUM_OP          reduce using rule 22 (mutable -> NUMBER .)
-    MUL_OP          reduce using rule 22 (mutable -> NUMBER .)
-    ;               reduce using rule 22 (mutable -> NUMBER .)
-    }               reduce using rule 22 (mutable -> NUMBER .)
-
-
-state 23
-
-    (14) return_stmt -> RETURN . ;
-    (15) return_stmt -> RETURN . expression ;
-    (16) expression -> . mutable = simple_expression
-    (17) expression -> . mutable = mutable
-    (18) expression -> . simple_expression
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
-    (19) simple_expression -> . mutable SUM_OP mutable
-    (20) simple_expression -> . mutable MUL_OP mutable
-
-    ;               shift and go to state 32
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
-
-    expression                     shift and go to state 31
-    simple_expression              shift and go to state 20
-    mutable                        shift and go to state 28
-
-state 24
 
     (10) statement -> return_stmt .
 
@@ -417,7 +294,41 @@ state 24
     $end            reduce using rule 10 (statement -> return_stmt .)
 
 
-state 25
+state 17
+
+    (16) expression -> mutable . = simple_expression
+    (17) expression -> mutable . = mutable
+    (18) expression -> mutable . = call
+    (20) simple_expression -> mutable . SUM_OP mutable
+    (21) simple_expression -> mutable . MUL_OP mutable
+
+    =               shift and go to state 30
+    SUM_OP          shift and go to state 31
+    MUL_OP          shift and go to state 29
+
+
+state 18
+
+    (14) return_stmt -> RETURN . ;
+    (15) return_stmt -> RETURN . expression ;
+    (16) expression -> . mutable = simple_expression
+    (17) expression -> . mutable = mutable
+    (18) expression -> . mutable = call
+    (19) expression -> . simple_expression
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
+    (20) simple_expression -> . mutable SUM_OP mutable
+    (21) simple_expression -> . mutable MUL_OP mutable
+
+    ;               shift and go to state 33
+    ID              shift and go to state 24
+    NUMBER          shift and go to state 23
+
+    expression                     shift and go to state 32
+    mutable                        shift and go to state 17
+    simple_expression              shift and go to state 28
+
+state 19
 
     (9) statement -> compound_stmt .
 
@@ -429,7 +340,7 @@ state 25
     $end            reduce using rule 9 (statement -> compound_stmt .)
 
 
-state 26
+state 20
 
     (12) expression_stmt -> ; .
 
@@ -441,52 +352,170 @@ state 26
     $end            reduce using rule 12 (expression_stmt -> ; .)
 
 
-state 27
+state 21
+
+    (8) statement -> expression_stmt .
+
+    VOID            reduce using rule 8 (statement -> expression_stmt .)
+    INT             reduce using rule 8 (statement -> expression_stmt .)
+    FLOAT           reduce using rule 8 (statement -> expression_stmt .)
+    BOOL            reduce using rule 8 (statement -> expression_stmt .)
+    CHAR            reduce using rule 8 (statement -> expression_stmt .)
+    $end            reduce using rule 8 (statement -> expression_stmt .)
+
+
+state 22
+
+    (7) fun_declaration -> type_specifier ID ( ) statement .
+
+    VOID            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
+    INT             reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
+    FLOAT           reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
+    BOOL            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
+    CHAR            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
+    $end            reduce using rule 7 (fun_declaration -> type_specifier ID ( ) statement .)
+
+
+state 23
+
+    (24) mutable -> NUMBER .
+
+    =               reduce using rule 24 (mutable -> NUMBER .)
+    SUM_OP          reduce using rule 24 (mutable -> NUMBER .)
+    MUL_OP          reduce using rule 24 (mutable -> NUMBER .)
+    ;               reduce using rule 24 (mutable -> NUMBER .)
+    }               reduce using rule 24 (mutable -> NUMBER .)
+
+
+state 24
+
+    (23) mutable -> ID .
+
+    =               reduce using rule 23 (mutable -> ID .)
+    SUM_OP          reduce using rule 23 (mutable -> ID .)
+    MUL_OP          reduce using rule 23 (mutable -> ID .)
+    ;               reduce using rule 23 (mutable -> ID .)
+    }               reduce using rule 23 (mutable -> ID .)
+
+
+state 25
 
     (11) expression_stmt -> expression . ;
 
-    ;               shift and go to state 33
+    ;               shift and go to state 34
 
+
+state 26
+
+    (30) statement -> SUM_OP . statement
+    (8) statement -> . expression_stmt
+    (9) statement -> . compound_stmt
+    (10) statement -> . return_stmt
+    (30) statement -> . SUM_OP statement
+    (11) expression_stmt -> . expression ;
+    (12) expression_stmt -> . ;
+    (13) compound_stmt -> . { expression }
+    (14) return_stmt -> . RETURN ;
+    (15) return_stmt -> . RETURN expression ;
+    (16) expression -> . mutable = simple_expression
+    (17) expression -> . mutable = mutable
+    (18) expression -> . mutable = call
+    (19) expression -> . simple_expression
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
+    (20) simple_expression -> . mutable SUM_OP mutable
+    (21) simple_expression -> . mutable MUL_OP mutable
+
+    SUM_OP          shift and go to state 26
+    ;               shift and go to state 20
+    {               shift and go to state 27
+    RETURN          shift and go to state 18
+    ID              shift and go to state 24
+    NUMBER          shift and go to state 23
+
+    expression_stmt                shift and go to state 21
+    statement                      shift and go to state 35
+    return_stmt                    shift and go to state 16
+    compound_stmt                  shift and go to state 19
+    expression                     shift and go to state 25
+    mutable                        shift and go to state 17
+    simple_expression              shift and go to state 28
+
+state 27
+
+    (13) compound_stmt -> { . expression }
+    (16) expression -> . mutable = simple_expression
+    (17) expression -> . mutable = mutable
+    (18) expression -> . mutable = call
+    (19) expression -> . simple_expression
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
+    (20) simple_expression -> . mutable SUM_OP mutable
+    (21) simple_expression -> . mutable MUL_OP mutable
+
+    ID              shift and go to state 24
+    NUMBER          shift and go to state 23
+
+    expression                     shift and go to state 36
+    mutable                        shift and go to state 17
+    simple_expression              shift and go to state 28
 
 state 28
 
-    (16) expression -> mutable . = simple_expression
-    (17) expression -> mutable . = mutable
-    (19) simple_expression -> mutable . SUM_OP mutable
-    (20) simple_expression -> mutable . MUL_OP mutable
+    (19) expression -> simple_expression .
 
-    =               shift and go to state 35
-    SUM_OP          shift and go to state 34
-    MUL_OP          shift and go to state 36
+    }               reduce using rule 19 (expression -> simple_expression .)
+    ;               reduce using rule 19 (expression -> simple_expression .)
 
 
 state 29
 
-    (13) compound_stmt -> { expression . }
+    (21) simple_expression -> mutable MUL_OP . mutable
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
 
-    }               shift and go to state 37
+    ID              shift and go to state 24
+    NUMBER          shift and go to state 23
 
+    mutable                        shift and go to state 37
 
 state 30
 
-    (28) statement -> SUM_OP statement .
+    (16) expression -> mutable = . simple_expression
+    (17) expression -> mutable = . mutable
+    (18) expression -> mutable = . call
+    (20) simple_expression -> . mutable SUM_OP mutable
+    (21) simple_expression -> . mutable MUL_OP mutable
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
+    (22) call -> . ID ( )
 
-    VOID            reduce using rule 28 (statement -> SUM_OP statement .)
-    INT             reduce using rule 28 (statement -> SUM_OP statement .)
-    FLOAT           reduce using rule 28 (statement -> SUM_OP statement .)
-    BOOL            reduce using rule 28 (statement -> SUM_OP statement .)
-    CHAR            reduce using rule 28 (statement -> SUM_OP statement .)
-    $end            reduce using rule 28 (statement -> SUM_OP statement .)
+    ID              shift and go to state 39
+    NUMBER          shift and go to state 23
 
+    call                           shift and go to state 38
+    mutable                        shift and go to state 40
+    simple_expression              shift and go to state 41
 
 state 31
 
-    (15) return_stmt -> RETURN expression . ;
+    (20) simple_expression -> mutable SUM_OP . mutable
+    (23) mutable -> . ID
+    (24) mutable -> . NUMBER
 
-    ;               shift and go to state 38
+    ID              shift and go to state 24
+    NUMBER          shift and go to state 23
 
+    mutable                        shift and go to state 42
 
 state 32
+
+    (15) return_stmt -> RETURN expression . ;
+
+    ;               shift and go to state 43
+
+
+state 33
 
     (14) return_stmt -> RETURN ; .
 
@@ -498,7 +527,7 @@ state 32
     $end            reduce using rule 14 (return_stmt -> RETURN ; .)
 
 
-state 33
+state 34
 
     (11) expression_stmt -> expression ; .
 
@@ -510,56 +539,82 @@ state 33
     $end            reduce using rule 11 (expression_stmt -> expression ; .)
 
 
-state 34
-
-    (19) simple_expression -> mutable SUM_OP . mutable
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
-
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
-
-    mutable                        shift and go to state 39
-
 state 35
 
-    (16) expression -> mutable = . simple_expression
-    (17) expression -> mutable = . mutable
-    (19) simple_expression -> . mutable SUM_OP mutable
-    (20) simple_expression -> . mutable MUL_OP mutable
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
+    (30) statement -> SUM_OP statement .
 
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
+    VOID            reduce using rule 30 (statement -> SUM_OP statement .)
+    INT             reduce using rule 30 (statement -> SUM_OP statement .)
+    FLOAT           reduce using rule 30 (statement -> SUM_OP statement .)
+    BOOL            reduce using rule 30 (statement -> SUM_OP statement .)
+    CHAR            reduce using rule 30 (statement -> SUM_OP statement .)
+    $end            reduce using rule 30 (statement -> SUM_OP statement .)
 
-    simple_expression              shift and go to state 40
-    mutable                        shift and go to state 41
 
 state 36
 
-    (20) simple_expression -> mutable MUL_OP . mutable
-    (21) mutable -> . ID
-    (22) mutable -> . NUMBER
+    (13) compound_stmt -> { expression . }
 
-    ID              shift and go to state 18
-    NUMBER          shift and go to state 22
+    }               shift and go to state 44
 
-    mutable                        shift and go to state 42
 
 state 37
 
-    (13) compound_stmt -> { expression } .
+    (21) simple_expression -> mutable MUL_OP mutable .
 
-    VOID            reduce using rule 13 (compound_stmt -> { expression } .)
-    INT             reduce using rule 13 (compound_stmt -> { expression } .)
-    FLOAT           reduce using rule 13 (compound_stmt -> { expression } .)
-    BOOL            reduce using rule 13 (compound_stmt -> { expression } .)
-    CHAR            reduce using rule 13 (compound_stmt -> { expression } .)
-    $end            reduce using rule 13 (compound_stmt -> { expression } .)
+    ;               reduce using rule 21 (simple_expression -> mutable MUL_OP mutable .)
+    }               reduce using rule 21 (simple_expression -> mutable MUL_OP mutable .)
 
 
 state 38
+
+    (18) expression -> mutable = call .
+
+    }               reduce using rule 18 (expression -> mutable = call .)
+    ;               reduce using rule 18 (expression -> mutable = call .)
+
+
+state 39
+
+    (23) mutable -> ID .
+    (22) call -> ID . ( )
+
+    SUM_OP          reduce using rule 23 (mutable -> ID .)
+    MUL_OP          reduce using rule 23 (mutable -> ID .)
+    ;               reduce using rule 23 (mutable -> ID .)
+    }               reduce using rule 23 (mutable -> ID .)
+    (               shift and go to state 45
+
+
+state 40
+
+    (17) expression -> mutable = mutable .
+    (20) simple_expression -> mutable . SUM_OP mutable
+    (21) simple_expression -> mutable . MUL_OP mutable
+
+    }               reduce using rule 17 (expression -> mutable = mutable .)
+    ;               reduce using rule 17 (expression -> mutable = mutable .)
+    SUM_OP          shift and go to state 31
+    MUL_OP          shift and go to state 29
+
+
+state 41
+
+    (16) expression -> mutable = simple_expression .
+
+    }               reduce using rule 16 (expression -> mutable = simple_expression .)
+    ;               reduce using rule 16 (expression -> mutable = simple_expression .)
+
+
+state 42
+
+    (20) simple_expression -> mutable SUM_OP mutable .
+
+    ;               reduce using rule 20 (simple_expression -> mutable SUM_OP mutable .)
+    }               reduce using rule 20 (simple_expression -> mutable SUM_OP mutable .)
+
+
+state 43
 
     (15) return_stmt -> RETURN expression ; .
 
@@ -571,38 +626,29 @@ state 38
     $end            reduce using rule 15 (return_stmt -> RETURN expression ; .)
 
 
-state 39
+state 44
 
-    (19) simple_expression -> mutable SUM_OP mutable .
+    (13) compound_stmt -> { expression } .
 
-    ;               reduce using rule 19 (simple_expression -> mutable SUM_OP mutable .)
-    }               reduce using rule 19 (simple_expression -> mutable SUM_OP mutable .)
-
-
-state 40
-
-    (16) expression -> mutable = simple_expression .
-
-    ;               reduce using rule 16 (expression -> mutable = simple_expression .)
-    }               reduce using rule 16 (expression -> mutable = simple_expression .)
+    VOID            reduce using rule 13 (compound_stmt -> { expression } .)
+    INT             reduce using rule 13 (compound_stmt -> { expression } .)
+    FLOAT           reduce using rule 13 (compound_stmt -> { expression } .)
+    BOOL            reduce using rule 13 (compound_stmt -> { expression } .)
+    CHAR            reduce using rule 13 (compound_stmt -> { expression } .)
+    $end            reduce using rule 13 (compound_stmt -> { expression } .)
 
 
-state 41
+state 45
 
-    (17) expression -> mutable = mutable .
-    (19) simple_expression -> mutable . SUM_OP mutable
-    (20) simple_expression -> mutable . MUL_OP mutable
+    (22) call -> ID ( . )
 
-    ;               reduce using rule 17 (expression -> mutable = mutable .)
-    }               reduce using rule 17 (expression -> mutable = mutable .)
-    SUM_OP          shift and go to state 34
-    MUL_OP          shift and go to state 36
+    )               shift and go to state 46
 
 
-state 42
+state 46
 
-    (20) simple_expression -> mutable MUL_OP mutable .
+    (22) call -> ID ( ) .
 
-    ;               reduce using rule 20 (simple_expression -> mutable MUL_OP mutable .)
-    }               reduce using rule 20 (simple_expression -> mutable MUL_OP mutable .)
+    ;               reduce using rule 22 (call -> ID ( ) .)
+    }               reduce using rule 22 (call -> ID ( ) .)
 
