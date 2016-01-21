@@ -63,7 +63,8 @@ def p_expression(p):
 
 def p_simple_expression(p):
 	''' simple_expression : mutable SUM_OP mutable
-							| mutable MUL_OP mutable'''
+							| mutable MUL_OP mutable
+							| call'''
 	p[0] = AST.ExpressionNode([p[1], p[3]])
 
 def p_call(p):
