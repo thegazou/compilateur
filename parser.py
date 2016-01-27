@@ -57,7 +57,8 @@ def p_declaration(p):
     except:
         #used if it's a tokenNod
         vars[p[2].tok].append(p[1].tok)
-        vars[p[2].tok].append(0)
+        vars[p[2].tok].append(None)
+        vars[p[2].tok].append(False)
     p[0] = AST.DeclarationNode([p[1],p[2]])
 
 def p_delaration_init(p):

@@ -3,3 +3,7 @@ generated/parsetab.py
 generated/parsetab.py
 *.out
 *.pyc
+*.pyc
+*.py
+*.out
+generated/parsetab.py

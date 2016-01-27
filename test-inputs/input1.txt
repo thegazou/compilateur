@@ -3,4 +3,5 @@ float tata = 0.4;
 int bibi;
 a = toto+1.5; print 2*a;
 b = a*2;
-print b
+print b;
+print bug
